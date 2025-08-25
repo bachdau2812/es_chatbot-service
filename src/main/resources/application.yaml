@@ -7,6 +7,23 @@ spring:
   application:
     name: chatbot-service
 
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  kafka:
+    bootstrap-server: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: default-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.dauducbach.event"
+
   datasource:
     url: "jdbc:mysql://localhost:3306/chatbot_service"
     driverClassName: "com.mysql.cj.jdbc.Driver"
@@ -36,3 +53,13 @@ spring:
       elasticsearch:
         initialize-schema: true
         index-name: products_vector
+
+logging:
+  level:
+    io.modelcontextprotocol: TRACE
+
+
+gemini-key: ${OPENAI_API_KEY}
+
+jwt:
+  signedKey: "1TjXchw5FloESb63Kc+DFhTARvpWL4jUGCwfGWxuG5SIf/1y/LgJxHnMqaF6A/ij"
