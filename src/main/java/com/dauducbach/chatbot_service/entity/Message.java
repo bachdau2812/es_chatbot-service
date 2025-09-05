@@ -3,6 +3,7 @@ package com.dauducbach.chatbot_service.entity;
 import com.dauducbach.chatbot_service.dto.MessageSender;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -24,6 +25,8 @@ public class Message {
     Conversation conversation;
 
     MessageSender messageSender;
+
+    @Lob
     String content;
     Instant timestamp;
 }
